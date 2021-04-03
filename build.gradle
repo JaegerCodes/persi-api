@@ -1,0 +1,46 @@
+
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.32'
+    id 'application'
+    id "org.jetbrains.kotlin.plugin.serialization" version "1.5.0-M2"
+}
+
+ext {
+   ktorVersion = "1.4.0"
+}
+
+group = "com.llamsoft"
+version = '1.0'
+
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven { url 'https://dl.bintray.com/kotlin/kotlinx' }
+    maven { url 'https://dl.bintray.com/kotlin/ktor' }
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = '1.8'
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = '1.8'
+}
+
+dependencies {
+    implementation "io.ktor:ktor-server-core:$ktorVersion"
+    implementation "io.ktor:ktor-server-netty:$ktorVersion"
+    implementation "io.ktor:ktor-serialization:$ktorVersion"
+    implementation "io.ktor:ktor-server-sessions:$ktorVersion"
+
+    implementation "com.h2database:h2:1.4.200"
+
+    implementation "ch.qos.logback:logback-classic:1.2.3"
+    implementation "org.jsoup:jsoup:1.11.3"
+}
+
+application {
+    mainClassName = 'io.ktor.server.netty.EngineMain'
+}
